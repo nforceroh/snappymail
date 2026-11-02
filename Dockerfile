@@ -1,4 +1,4 @@
-FROM ghcr.io/nforceroh/k8s-nginx-php:latest
+FROM ghcr.io/nforceroh/nginx-php:latest
 
 ARG \
   BUILD_DATE=now \
@@ -12,7 +12,7 @@ LABEL \
   org.label-schema.maintainer="Sylvain Martin (sylvain@nforcer.com)" \
   org.label-schema.build-date="${BUILD_DATE}" \
   org.label-schema.version="${VERSION}" \
-  org.label-schema.vcs-url="https://github.com/nforcer/k8s-snappymail" \
+  org.label-schema.vcs-url="https://github.com/nforceroh/snappymail" \
   org.label-schema.vcs-ref="${VERSION}" \
   org.label-schema.schema-version="1.0"
 
