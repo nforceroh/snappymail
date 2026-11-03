@@ -22,7 +22,7 @@ ENV \
     MEMORY_LIMIT=128M \
     SECURE_COOKIES=true
 
-### Install Dependencies
+### Install Dependencies | Install php-gnupg | Build snappymail
 RUN set -xe \
   && apk --quiet --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ add --virtual=.build-deps php85-dev gpgme-dev make g++ gcc git \
     && apk --quiet --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ add --virtual=run-deps \

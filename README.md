@@ -30,6 +30,23 @@ On first boot the `init-snappymail` s6 service copies `/data` into the
 `/snappymail` volume, enables error and auth logging to files under
 `/snappymail/web/data/_data_/_default_/logs/`, and fixes ownership to `www-data`.
 
+## Usage
+
+Run the image with a persistent data volume and publish port `8080`:
+
+```sh
+docker run -d --name snappymail \
+  --restart unless-stopped \
+  -p 8080:8080 \
+  -v snappymail-data:/snappymail \
+  ghcr.io/nforceroh/snappymail:latest
+```
+
+Open `http://localhost:8080` for initial setup. Configure the IMAP/SMTP
+servers in SnappyMail and put the web interface behind TLS and suitable access
+controls. The first-boot service prints the default administrator password
+when the password file is present; change it immediately.
+
 ## Services
 
 s6-overlay runs the nginx-php longruns (`svc-nginx`, `svc-php`) plus one
