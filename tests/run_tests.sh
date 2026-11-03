@@ -61,6 +61,14 @@ check "s6 service database is populated" \
 
 check "directory /data/web exists" in_image 'test -d /data/web'
 
+# --- pinned version ARGs ------------------------------------------------------
+# The Dockerfile must keep its version pins explicit so Renovate and audits can
+# see exactly what is baked in.
+check "SNAPPYMAIL_VERSION pinned in Dockerfile" \
+	grep -qE '^  SNAPPYMAIL_VERSION=[0-9]+\.[0-9]+\.[0-9]+ \\$' "$(dirname "$0")/../Dockerfile"
+check "PHP_GNUPG_REF pinned in Dockerfile" \
+	grep -qE '^  PHP_GNUPG_REF=gnupg-[0-9]+\.[0-9]+\.[0-9]+$' "$(dirname "$0")/../Dockerfile"
+
 # --- boot check -------------------------------------------------------------
 # Leaf images need external services (databases, rspamd, ...) to settle, so
 # still running after the settle window counts as success. A crash does not.

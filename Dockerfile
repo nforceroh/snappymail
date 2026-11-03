@@ -1,4 +1,4 @@
-FROM ghcr.io/nforceroh/nginx-php:latest
+FROM ghcr.io/nforceroh/nginx-php:3.24
 
 ARG \
   BUILD_DATE=now \
@@ -22,6 +22,7 @@ ENV \
     MEMORY_LIMIT=128M \
     SECURE_COOKIES=true
 
+### Install Dependencies
 RUN set -xe \
   && apk --quiet --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ add --virtual=.build-deps php85-dev gpgme-dev make g++ gcc git \
     && apk --quiet --no-cache --repository=http://dl-cdn.alpinelinux.org/alpine/edge/testing/ add --virtual=run-deps \
@@ -46,6 +47,7 @@ RUN set -xe \
     && apk del --quiet --no-cache --purge .build-deps \
     && rm -rf /var/cache/apk/*
 
+### Add Files
 ADD /content /
 ADD --chmod=755 /content/etc/s6-overlay /etc/s6-overlay
 
